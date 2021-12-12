@@ -14,8 +14,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class LoginRequest {
 	
-	@Schema(example = "admin1")
+	@Schema(example = "Admin123")
 	private String userid;
-	@Schema(example = "123")
+	@Schema(example = "Admin@123")
 	private String password;
 }
