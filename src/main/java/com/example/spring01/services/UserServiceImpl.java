@@ -18,7 +18,6 @@ import com.example.spring01.mapper.UserMapper;
 import com.example.spring01.model.UserInput;
 import com.example.spring01.repositories.UserRepository;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,8 +52,9 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 		User user2 = new User();
 		try {
 			userMapper.inputToEntity(userInput,user2);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+			throw new BadRequestException("File is too large");
 		}
 		return userMapper.entityToDto(userRepository.save(user2));
 	}
@@ -72,8 +72,9 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 		}
 		try {
 			userMapper.inputToEntity(userInput, uOptional.get());
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+			throw new BadRequestException("File is too large");
 		}
 		User user2 = userRepository.save(uOptional.get());
 		return userMapper.entityToDto(user2);
